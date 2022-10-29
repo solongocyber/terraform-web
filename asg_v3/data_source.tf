@@ -17,7 +17,7 @@ data "terraform_remote_state" "vpc_v3" {
   backend = "s3"
   config = {
     bucket = "aws-session-may2022-solongo"
-    key    = "vpc_v3/terraform.tfstate"
+    key    = "solongo/vpc_v3/terraform.tfstate"
     region = "us-east-2"
   }
 }
@@ -26,9 +26,17 @@ data "terraform_remote_state" "alb_tg" {
 backend = "s3" 
 config  =  {
     bucket = "aws-session-may2022-solongo"
-    key    = "aws_alb_v2/terraform.tfstate"
+    key    = "solongo/aws_alb_v2/terraform.tfstate"
     region = "us-east-2"
   }
 
 
 }
+
+data "template_file" "user_data"{
+  template = file("user_data.sh")
+    
+  vars = {
+      environment = var.env
+    }
+  }
