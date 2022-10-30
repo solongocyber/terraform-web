@@ -7,7 +7,7 @@ resource "aws_autoscaling_group" "asg_v3" {
   desired_capacity          = var.desired_capacity
   force_delete              = var.env == "dev" ? true : false
   launch_configuration      = aws_launch_configuration.launch_conf_v3.name
-  vpc_zone_identifier       = data.terraform_remote_state.vpc_v3.outputs.subnet_id
+  vpc_zone_identifier       = data.terraform_remote_state.vpc_v3.outputs.private_subnet
 
 }
 
